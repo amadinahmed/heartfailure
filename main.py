@@ -130,7 +130,7 @@ st.text("")
 # time
 # Follow-up period (days)
 
-time = st.number_input(' time?')
+time = st.number_input('How long since your last visit? (Days)')
 st.write('time:', time)
 
 
