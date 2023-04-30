@@ -1,4 +1,3 @@
-
 # https://docs.streamlit.io/
 # Run: streamlit run main.py
 # pip install -U scikit-learn
@@ -14,7 +13,7 @@ st.text("")
 st.markdown('This project aims to develop a machine learning model to predict the risk of heart failure in patients. Heart Failure or otherwise known as Cardiovascular diseases (CVDs) are the number 1 cause of death globally , taking an estimated 17.9 million lives each year. We want to tackle this issue. The ultimate goal of this project is to develop a tool that can aid both patients and clinicians in identifying heart failure at an early stage.  ')
 st.text("")
 
-user_input = [62.0, 1, 447, 1, 30, 1, 265000.00, 2.5, 132, 1, 1, 7]
+#user_input = [62.0, 1, 447, 1, 30, 1, 265000.00, 2.5, 132, 1, 1, 7]
 
 
 # age	
@@ -159,7 +158,7 @@ def predicts(user_input):
     # ----------------------------------------------------------------------------------------------------------------------------------
 
     # SVM
-    model = SVC()
+    model = SVC(kernel='rbf', C=1000, gamma=0.001)
     model.fit(heart_failure_pca, target)
 
     # user_input only used for testing; replace the list with real answers
@@ -176,9 +175,16 @@ def predicts(user_input):
 
     print(prediction)
     if prediction == [0]:
-        st.error(f' This person is unlikely to have heart falure.')
+        st.success(f'This person is unlikely to have heart failure.')
     elif prediction == [1]:
-        st.success(f'This person is likely to have heart falure')
+        st.error(f"This person is likely to have heart failure.\n\n"
+                 f"Based on the information you've provided, our program has detected a higher risk of heart failure. "
+                 f"While this prediction may not be entirely accurate, it's important to take precautions to protect "
+                 f"your health. We strongly recommend that you schedule an appointment with your doctor or a healthcare "
+                 f"professional as soon as possible to discuss these results and get a comprehensive evaluation. "
+                 f"It's always better to be safe than sorry, and early detection and treatment can make a big difference "
+                 f"in managing your heart health. We wish you the best of health!")
+
     
 
 if st.button('Predict heart failure'):
