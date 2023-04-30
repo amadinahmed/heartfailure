@@ -23,7 +23,7 @@ heart_failure_pca = pd.DataFrame(transformed_features, columns=['PC1', 'PC2', 'P
 # ----------------------------------------------------------------------------------------------------------------------------------
 
 # SVM
-model = SVC()
+model = SVC(kernel='rbf', C=1000, gamma=0.001)
 model.fit(heart_failure_pca, target)
 
 # user_input only used for testing; replace the list with real answers
